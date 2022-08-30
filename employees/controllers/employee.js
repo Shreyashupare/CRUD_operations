@@ -1,7 +1,7 @@
 const db = require('../models');
 
 const Employee = db.employee;
-
+const helper = require('../helpers/api_services.js');
 
 
 const addEmployee = async(req, res)=>{
@@ -16,23 +16,22 @@ const addEmployee = async(req, res)=>{
         res.statusCode = 200;
         res.send('Employee added successfully');
     }catch(err){
+        res.statusCode = 500;
         res.send('Employee Not added. Error : '+ err);
     }
 }
 
+//Get All Employees data
 const findEmployees = async(req, res)=>{
     try{
-        console.log("insdie finadall 0")
-        const employees = await Employee.findAll();
-        console.log("inside find all 1")
+        const employees = await helper.get_all_employees();
         res.statusCode = 200;
-        res.send('Employees of Rebel :\n' + JSON.stringify(employees));
-        console.log("inside findall 2")
+        res.send(employees);
     }
-    catch(err)
-    {
+    catch(err){
+        res.statusCode = 500;
         res.send('Error : '+err);
-    } 
+    }
 }
 
 const findEmployee = async(req, res)=>{
@@ -47,6 +46,7 @@ const findEmployee = async(req, res)=>{
         // res.send(employee);
     }
     catch(err){
+        res.statusCode = 500;
         res.send('Error: '+err);
     }
 }
@@ -70,6 +70,8 @@ const updateEmployee = async(req, res)=>{
         res.send(`Employee Details updated successfully`);
     }
     catch(err){
+        console.log(err)
+        res.statusCode = 500;
         res.send('Error : '+err);
     }
 }
@@ -86,6 +88,7 @@ const deleteEmployee = async(req, res)=>{
         
     }
     catch(err){
+        res.statusCode = 500;
         res.send('Error : '+err);
     }
 }

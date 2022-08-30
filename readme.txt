@@ -10,3 +10,8 @@ work to be done : 1.  need to handle exceptions
                     when adding employee with same employee id then throw error employee id is already exist
 
                  2. add required permission while delete employee(like send parameter 'password' from req header)
+
+
+this commit - 
+        added redis cache for findAll
+        re constructed folders and files 

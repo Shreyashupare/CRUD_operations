@@ -20,9 +20,9 @@ sequelize.authenticate()
 
 const db = {}
 db.Sequelize = Sequelize
-db. sequelize = sequelize
+db.sequelize = sequelize
 
-db.employee = require('./employeeModel.js')(sequelize, DataTypes)
+db.employee = require('./employee.js')(sequelize, DataTypes)
 
 
 sequelize.sync();
