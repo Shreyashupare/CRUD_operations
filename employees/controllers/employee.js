@@ -10,9 +10,9 @@ const addEmployee = async(req, res)=>{
         name: req.body.name,
         age: req.body.age
     }
-    
+
     try{
-        let employee = await Employee.create(detaiils)
+        await helper.add_employee(detaiils)
         res.statusCode = 200;
         res.send('Employee added successfully');
     }catch(err){
@@ -36,11 +36,7 @@ const findEmployees = async(req, res)=>{
 
 const findEmployee = async(req, res)=>{
     try{
-        let employee = await Employee.findOne({
-            where:{
-                Emp_id: req.params.id,
-            }
-        });
+        const employee = await helper.get_one_employee(req.params.id);
         res.statusCode = 200;
         res.send('Employee with id ' +req.params.id + ': ' + JSON.stringify(employee));
         // res.send(employee);
@@ -53,19 +49,12 @@ const findEmployee = async(req, res)=>{
 
 const updateEmployee = async(req, res)=>{
     let Emp_id=req.body.Emp_id ;
-    let name=req.body.name;
-    let age=req.body.age;
+    let info = {
+        name: req.body.name,
+        age: req.body.age,
+    }
     try{
-        const employee = await Employee.update(
-            {
-                name: name,
-                age: age,
-            },
-            { where:{
-                Emp_id: Emp_id,
-            }
-            }
-        );
+        const employee = await helper.update_employee_details(Emp_id, info);
         res.statusCode = 200;
         res.send(`Employee Details updated successfully`);
     }
@@ -79,11 +68,7 @@ const updateEmployee = async(req, res)=>{
 const deleteEmployee = async(req, res)=>{
     let id = req.params.id;
     try{
-        let employee = await Employee.destroy({
-            where :{
-                Emp_id: id,
-            },
-        });
+        let employee = await helper.delete_employee(id);
         res.send(`Employee with id ${id} deleted successfully`);
         
     }

@@ -15,7 +15,44 @@ const get_all_employees = async()=>{
     }
 }
 
+const add_employee = (info)=>{
+    Employee.create(info);
+}
 
+const get_one_employee = async(emp_id)=>{
+    let employee = await Employee.findOne({
+        where:{
+            Emp_id: emp_id,
+        }
+    });
+    return employee;
+}
+
+const update_employee_details = async(emp_id, details)=>{
+    const {name, age } = details;
+    const employee = await Employee.update(
+        {
+            name: name,
+            age: age,
+        },
+        { where:{
+            Emp_id: emp_id,
+        }
+        }
+    );
+}
+
+const delete_employee = async(emp_id)=>{
+    await Employee.destroy({
+        where :{
+            Emp_id: emp_id,
+        },
+    });
+}
 module.exports = {
-    get_all_employees
+    get_all_employees,
+    add_employee,
+    get_one_employee,
+    update_employee_details,
+    delete_employee
 }

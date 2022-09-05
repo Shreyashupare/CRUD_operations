@@ -12,6 +12,10 @@ work to be done : 1.  need to handle exceptions
                  2. add required permission while delete employee(like send parameter 'password' from req header)
 
 
-this commit - 
+4th commit - 
         added redis cache for findAll
         re constructed folders and files 
+
+this commit - 
+        implemented validator for post request as a middleware
+        
