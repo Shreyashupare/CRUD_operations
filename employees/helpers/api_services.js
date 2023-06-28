@@ -27,7 +27,20 @@ const get_one_employee = async(emp_id)=>{
     });
     return employee;
 }
-
+const upsert_employee_details = async(emp_id, details)=>{
+    const {name, age } = details;
+    const employee = await Employee.upsert(
+        {
+            Emp_id: emp_id,
+            name: name,
+            age: age,
+        },
+        { where:{
+            Emp_id: emp_id,
+        }
+        }
+    );
+}
 const update_employee_details = async(emp_id, details)=>{
     const {name, age } = details;
     const employee = await Employee.update(
@@ -50,6 +63,7 @@ const delete_employee = async(emp_id)=>{
     });
 }
 module.exports = {
+    upsert_employee_details,
     get_all_employees,
     add_employee,
     get_one_employee,

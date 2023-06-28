@@ -11,6 +11,8 @@ router.put('/:id', employeeController.updateEmployee)
 
 router.delete('/:id', employeeController.deleteEmployee)
 
+router.post('/upsert', employeeController.upsertEmployee)
+
 router.post('/addEmployee', add_validator ,employeeController.addEmployee)
 
 module.exports = router

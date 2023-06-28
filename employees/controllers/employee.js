@@ -38,12 +38,30 @@ const findEmployee = async(req, res)=>{
     try{
         const employee = await helper.get_one_employee(req.params.id);
         res.statusCode = 200;
-        res.send('Employee with id ' +req.params.id + ': ' + JSON.stringify(employee));
+        res.send(JSON.stringify(employee));
         // res.send(employee);
     }
     catch(err){
         res.statusCode = 500;
         res.send('Error: '+err);
+    }
+}
+
+const upsertEmployee = async(req, res)=>{
+    let Emp_id=req.body.Emp_id ;
+    let info = {
+        name: req.body.name,
+        age: req.body.age,
+    }
+    try{
+        const employee = await helper.upsert_employee_details(Emp_id, info);
+        res.statusCode = 200;
+        res.send(`Employee Details updated successfully`);
+    }
+    catch(err){
+        console.log(err)
+        res.statusCode = 500;
+        res.send('Error : '+err);
     }
 }
 
@@ -83,5 +101,6 @@ module.exports = {
     findEmployees,
     findEmployee,
     updateEmployee,
-    deleteEmployee
+    deleteEmployee,
+    upsertEmployee
 }
