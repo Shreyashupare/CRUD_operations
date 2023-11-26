@@ -3,7 +3,7 @@ dotenv.config();
 module.exports = {
     HOST: 'localhost',
     USER: 'root',
-    PASS: 'MySQL_server1',
-    DB: 'Rebel',
+    PASS: '',
+    DB: 'Company',
     dialect: 'mysql'
 }
