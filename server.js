@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const router = require('./employees/routes/server.routes.js')
-app.use('/rebel/employees', router)
+app.use('/company/employees', router)
 
 app.listen(PORT, () =>{
     console.log(`Server started at port ${PORT}`);
